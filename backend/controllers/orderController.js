@@ -3,7 +3,6 @@ import userModel from "../models/userModel.js";
 import razorpay from "razorpay";
 import { createShiprocketOrder } from "./shiprocketController.js";
 
-
 // global variables
 const currency = "inr";
 const deliveryCharge = 249;
@@ -63,15 +62,11 @@ const placeOrder = async (req, res) => {
       message: "Order Placed",
       order: newOrder,
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
-
-
 
 // Placing orders using Razorpay Method
 const placeOrderRazorpay = async (req, res) => {
@@ -86,12 +81,10 @@ const placeOrderRazorpay = async (req, res) => {
     }
 
     if (!items || items.length === 0) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Cannot place order with an empty cart.",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Cannot place order with an empty cart.",
+      });
     }
 
     const userData = await userModel.findById(userId);
@@ -207,7 +200,9 @@ const userOrders = async (req, res) => {
     const userId = req.userId; // Extract from middleware
 
     if (!userId) {
-      return res.status(400).json({ success: false, message: "User ID is required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "User ID is required" });
     }
 
     // Test fetching orders without population to isolate the issue
@@ -217,7 +212,9 @@ const userOrders = async (req, res) => {
     console.log("Orders fetched:", orders);
 
     if (!orders) {
-      return res.status(404).json({ success: false, message: "No orders found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "No orders found" });
     }
 
     // If you want to populate, proceed only if orders are fetched correctly
@@ -232,7 +229,6 @@ const userOrders = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
 
 // update order status from Admin Panel
 const updateStatus = async (req, res) => {

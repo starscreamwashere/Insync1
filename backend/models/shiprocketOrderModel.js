@@ -14,6 +14,8 @@ const shiprocketOrderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-const ShiprocketOrder = mongoose.models.ShiprocketOrder || mongoose.model("ShiprocketOrder", shiprocketOrderSchema);
+const ShiprocketOrder =
+  mongoose.models.ShiprocketOrder ||
+  mongoose.model("ShiprocketOrder", shiprocketOrderSchema);
 
 export default ShiprocketOrder;

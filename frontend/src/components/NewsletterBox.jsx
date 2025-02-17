@@ -48,8 +48,8 @@ const NewsletterBox = () => {
       variants={fadeIn}
       className="text-center"
     >
-      <p className="text-2xl font-medium text-gray-800">Stay Updated with IMPACTPURE</p>
-      <p className="text-gray-400 mt-3">
+      <p className="text-2xl font-medium text-[#023047]">Stay Updated with IMPACTPURE</p>
+      <p className="text-gray-600 mt-3">
         Add your email to stay informed about the latest offers and updates from IMPACTPURE.
       </p>
 
@@ -67,7 +67,7 @@ const NewsletterBox = () => {
         />
         <motion.button
           type="submit"
-          className="bg-black text-white text-xs px-10 py-4 transition-all disabled:opacity-50"
+          className="bg-[#023047] text-white text-xs px-10 py-4 transition-all disabled:opacity-50"
           disabled={loading}
           whileHover={!loading ? buttonHover : {}}
         >

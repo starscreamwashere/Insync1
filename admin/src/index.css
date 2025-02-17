@@ -3,17 +3,44 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
     font-family: Outfit;
 }
 
-select,input,textarea{
-    border: 1px solid #c2c2c2;
-    outline-color: #C586A5;
+select,
+input,
+textarea {
+    border: 1px solid #8D99AE;
+    /* Soft grayish-blue border */
+    outline-color: #4EA8DE;
+    /* Light blue outline on focus */
     border-radius: 4px;
 }
 
-.active{
-    background-color: #ffebf5;
-    border-color: #C586A5;
+/* Adjacent color for active state (light blue) */
+.active {
+    background-color: #F5F7FA;
+    /* Lighter gray background */
+    border-color: #4EA8DE;
+    /* Light blue border on focus */
+}
+
+/* Button Styles */
+.primary-btn {
+    position: relative;
+    padding: 10px 24px;
+    font-size: 16px;
+    color: #023047;
+    /* Initial text color */
+    background-color: transparent;
+    /* Button background starts transparent */
+    border: 2px solid #023047;
+    /* Initial border color */
+    border-radius: 5px;
+    overflow: hidden;
+    /* Keeps wave inside the button */
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.4s ease, border-color 0.4s ease;
+    /* Smooth transition for text color and border */
 }

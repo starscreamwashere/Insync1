@@ -5,7 +5,7 @@ import { assets } from '../assets/assets';
 import CartTotal from '../components/CartTotal';
 
 const Cart = () => {
-  const { products, currency, cartItems, updateQuantity, token, navigate } = useContext(ShopContext);
+  const { products, currency, cartItems, updateQuantity, token, navigate, removeFromCart } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
   // Redirect to login if the user is not authenticated
@@ -52,8 +52,8 @@ const Cart = () => {
               <div className="flex items-start gap-6">
                 <img className="w-16 sm:w-20" src={productData.image[0]} alt="" />
                 <div>
-                  <p className="text-xs sm:text-lg font-medium">{productData.name}</p>
-                  <div className="flex items-center gap-5 mt-2">
+                  <p className="text-xs sm:text-lg font-medium text-[#023047]">{productData.name}</p>
+                  <div className="text-[#023047] flex items-center gap-5 mt-2">
                     <p>
                       {currency}
                       {productData.price}
@@ -67,38 +67,40 @@ const Cart = () => {
                     ? null
                     : updateQuantity(item._id, Number(e.target.value))
                 }
-                className="border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1"
+                className="text-[#023047] border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1"
                 type="number"
                 min={1}
                 defaultValue={item.quantity}
               />
               <img
-                onClick={() => updateQuantity(item._id, 0)}
-                className="w-4 mr-4 sm:w-5 cursor-pointer"
-                src={assets.bin_icon}
-                alt=""
-              />
+    onClick={() => removeFromCart(item._id)}
+    className="w-4 mr-4 sm:w-5 cursor-pointer"
+    src={assets.bin_icon}
+    alt="Remove"
+/>
+
+
             </div>
           );
         })}
       </div>
 
       <div className="flex justify-end my-20">
-  <div className="w-full sm:w-[450px]">
-    <div className="w-full text-end">
-      <button
-        onClick={() => cartData.length > 0 && navigate('/place-order')}
-        className={`text-sm my-8 px-8 py-3 ${cartData.length === 0
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-black text-white"
-          }`}
-        disabled={cartData.length === 0} // Prevents button click if cart is empty
-      >
-        PROCEED TO CHECKOUT
-      </button>
-    </div>
-  </div>
-</div>
+        <div className="w-full sm:w-[450px]">
+          <div className="w-full text-end">
+            <button
+              onClick={() => cartData.length > 0 && navigate('/place-order')}
+              className={`text-sm my-8 px-8 py-3 ${cartData.length === 0
+                ? "bg-gray-400 cursor-not-allowed"
+                : "primary-btn text-white"
+                }`}
+              disabled={cartData.length === 0} // Prevents button click if cart is empty
+            >
+              PROCEED TO CHECKOUT
+            </button>
+          </div>
+        </div>
+      </div>
 
     </div>
   );

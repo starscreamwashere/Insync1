@@ -49,20 +49,34 @@ export const SlideRight = (delay) => {
 
 export const SlideDownFade = {
   hidden: { opacity: 0, y: -50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
 export const ZoomLeft = {
   hidden: { opacity: 0, scale: 0.8, x: -50 },
-  visible: { opacity: 1, scale: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  visible: {
+    opacity: 1,
+    scale: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
 };
 
 export const RotateUp = {
   hidden: { opacity: 0, rotate: -10, y: 50 },
-  visible: { opacity: 1, rotate: 0, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  visible: {
+    opacity: 1,
+    rotate: 0,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
 };
 
 export const FlipRight = {
   hidden: { opacity: 0, rotateY: 90 },
-  visible: { opacity: 1, rotateY: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  visible: {
+    opacity: 1,
+    rotateY: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
 };

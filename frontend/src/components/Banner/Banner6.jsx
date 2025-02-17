@@ -4,8 +4,8 @@ import { SlideRight } from "../../utility/animation";
 
 const Banner6 = ({ image, title, subtitle, link }) => {
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 bg-[#f9f9f9]">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center py-14 gap-6">
+    <div className="w-full px-4 sm:px-6 lg:px-8 bg-[#F5F7FA]">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center py-14 gap-14">
         {/* Banner Text */}
         <div className="flex flex-col justify-center space-y-4 lg:max-w-[500px] order-2 md:order-1 md:ml-auto text-center md:text-left pr-2">
           <motion.p
@@ -13,7 +13,7 @@ const Banner6 = ({ image, title, subtitle, link }) => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-2xl lg:text-4xl font-bold"
+            className="text-2xl lg:text-4xl font-bold text-[#023047]"
             style={{ lineHeight: "1.8" }}
           >
             {title}
@@ -34,7 +34,7 @@ const Banner6 = ({ image, title, subtitle, link }) => {
             viewport={{ once: true }}
             className="flex justify-center md:justify-start"
           >
-            <a href={link} className="primary-btn">
+            <a href={link} className="exp-btn">
               Explore More
             </a>
           </motion.div>

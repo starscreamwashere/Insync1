@@ -22,6 +22,8 @@ import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
 import nilay from './nilay.jpg'
 import ajoba from './ajoba.jpg'
+import bhushan from './bhushan.jpg'
+import sneha from './sneha.jpg'
 
 export const assets = {
     logo,
@@ -42,7 +44,9 @@ export const assets = {
     stripe_logo,
     cross_icon,
     nilay,
-    ajoba
+    ajoba,
+    bhushan,
+    sneha
 }
 
 export const products = [

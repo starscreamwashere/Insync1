@@ -39,7 +39,7 @@ const LatestCollection = () => {
         {/* Subtitle Animation */}
         <motion.p
           variants={textFade}
-          className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600"
+          className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-[#023047]"
         >
           Explore IMPACTPURE®: Pure water, anytime, anywhere.
         </motion.p>

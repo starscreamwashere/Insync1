@@ -30,14 +30,14 @@ const EquipmentData = [
 
 const Equipments = () => {
   return (
-    <div className="w-full bg-white py-24">
+    <div className="w-full bg-[#FFFFFF] py-24">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 font-playfair">
         {/* Introductory Text */}
         <div className="col-span-1 space-y-4">
-          <h1 className="text-3xl md:text-4xl font-bold">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#023047]">
             What Makes IMPACTPURE Unique
           </h1>
-          <p className="text-gray-500">
+          <p className="text-[#023047]">
             Combining innovation, sustainability, and efficiency in water purification.
           </p>
         </div>
@@ -50,11 +50,11 @@ const Equipments = () => {
               variants={SlideLeft(item.delay)}
               initial="hidden"
               whileInView="visible"
-              className="bg-gray-100 space-y-4 p-6 hover:bg-white rounded-xl hover:shadow-[0_0_22px_0_rgba(0,0,0,0.15)]"
+              className="bg-[#F5F7FA] space-y-4 p-6 hover:bg-white rounded-xl hover:shadow-[0_8px_30px_4px_rgba(0,0,0,0.4)] transition-colors duration-300"
             >
-              <div className="text-4xl">{item.icon}</div>
-              <p className="text-2xl font-semibold">{item.title}</p>
-              <p className="text-gray-500">{item.desc}</p>
+              <div className="text-4xl text-[#023047]">{item.icon}</div>
+              <p className="text-2xl font-semibold text-[#023047]">{item.title}</p>
+              <p className="text-[#023047]">{item.desc}</p>
             </motion.div>
           ))}
         </div>

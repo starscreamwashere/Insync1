@@ -41,13 +41,13 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="py-14 mb-10 bg-gray-50 w-full">
+    <div className="py-14 mb-10 bg-[#FFFFFF] w-full"> {/* Lighter background from the palette */}
       {/* Header Section */}
       <div className="text-center mb-10 max-w-3xl mx-auto space-y-4">
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-4xl font-bold text-[#023047]"> {/* Dark blue text for title */}
           What Are The Customers Saying About Us
         </h1>
-        <p className="text-gray-500">
+        <p className="text-[#8D99AE]"> {/* Light gray text for description */}
           Here’s what our customers have to say about their experience with us.
         </p>
       </div>
@@ -57,7 +57,7 @@ const Testimonials = () => {
         <Slider {...settings}>
           {TestimonialsData.map((data) => (
             <div key={data.id} className="px-4">
-              <div className="flex flex-col gap-4 p-6 shadow-lg rounded-xl bg-white">
+              <div className="flex flex-col gap-4 p-6 shadow-lg rounded-xl bg-[#F5F7FA]">
                 {/* Upper Section */}
                 <div className="flex items-center gap-4">
                   <div className="relative">
@@ -68,14 +68,14 @@ const Testimonials = () => {
                     />
                   </div>
                   <div>
-                    <p className="text-xl font-semibold text-black/80">
+                    <p className="text-xl font-semibold text-[#023047]">
                       {data.name}
                     </p>
-                    <p className="text-sm text-gray-500">{data.position}</p>
+                    <p className="text-sm text-[#8D99AE]">{data.position}</p> {/* Light gray text for position */}
                   </div>
                 </div>
                 {/* Testimonial Text */}
-                <div className="py-4 text-gray-600">
+                <div className="py-4 text-[#023047]">
                   <p className="text-sm">{data.text}</p>
                 </div>
               </div>

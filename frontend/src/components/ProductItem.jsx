@@ -37,8 +37,8 @@ const ProductItem = ({ id, image, name, price }) => {
             alt={name}
           />
         </motion.div>
-        <p className="pt-3 pb-1 text-sm font-semibold text-gray-800 tracking-wide">{name}</p>
-        <p className="text-sm font-semibold text-gray-900">{currency}{price}</p>
+        <p className="text-[#023047] pt-3 pb-1 text-sm font-semibold text-gray-800 tracking-wide">{name}</p>
+        <p className="text-[#023047] text-sm font-semibold text-gray-900">{currency}{price}</p>
       </Link>
     </motion.div>
   );

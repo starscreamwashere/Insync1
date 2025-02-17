@@ -47,16 +47,16 @@ const Product = () => {
 
         {/* -------- Product Info ---------- */}
         <div className="flex-1">
-          <h1 className="font-medium text-2xl mt-2">{productData.name}</h1>
+          <h1 className="font-medium text-2xl mt-2 text-[#023047]">{productData.name}</h1>
 
-          <p className="mt-5 text-3xl font-medium">
+          <p className="mt-5 text-3xl font-medium text-[#023047]">
             {currency}
             {productData.price}
           </p>
           <p className="mt-5 text-gray-500 md:w-4/5">{productData.description}</p>
           <button
             onClick={() => addToCart(productData._id)}
-            className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700 mt-8"
+            className="primary-btn bg-black text-white px-8 py-3 text-sm active:bg-gray-700 mt-8"
           >
             ADD TO CART
           </button>
@@ -65,6 +65,7 @@ const Product = () => {
             <p>100% Original product.</p>
             <p>Cash on delivery is available on this product.</p>
             <p>6-month warranty included.</p>
+            <p>SOLD BY : PRO-WIN HEALTHCARE PRIVATE LIMITED.</p>
           </div>
         </div>
       </div>
@@ -72,7 +73,7 @@ const Product = () => {
       {/* ---------- Description & Review Section ------------- */}
       <div className="mt-20">
         <div className="flex">
-          <b className="border px-5 py-3 text-sm">Description</b>
+          <b className="border px-5 py-3 text-sm text-[#023047]">Description</b>
         </div>
         <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
           <p>

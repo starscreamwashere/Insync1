@@ -66,30 +66,49 @@ const ShopContextProvider = (props) => {
         return totalCount;
     };
 
-    // ✅ Update cart quantity
     const updateQuantity = async (itemId, quantity) => {
+        if (!token) {
+            toast.error("Log in to update cart!");
+            navigate("/login");
+            return;
+        }
+    
+        // Ensure the quantity is a positive number
+        if (quantity <= 0) {
+            toast.error("Quantity must be greater than 0!");
+            return;
+        }
+    
         let cartData = structuredClone(cartItems);
-        cartData[itemId] = quantity;
-        setCartItems(cartData);
+        cartData[itemId] = quantity; // Update the quantity locally
+        setCartItems(cartData); // Update UI instantly
     
-        // Show success toast
-        toast.success(`Quantity updated to ${quantity}`);
-    
-        if (token) {
-            try {
-                await axios.post(`${backendUrl}/api/cart/update`, { itemId, quantity }, { headers: { token } });
-            } catch (error) {
-                console.log("Update cart error:", error);
-    
-                if (error.response?.data?.message === "Session expired. Please log in again.") {
-                    handleExpiredToken();
-                } else {
-                    toast.error("Error updating cart. Please try again.");
+        try {
+            // Send update request to the backend without userId
+            await axios.post(
+                `${backendUrl}/api/cart/update`,
+                { itemId, quantity },  // Send only itemId and quantity
+                { 
+                    headers: { 
+                        token: localStorage.getItem('token') // Ensure the token is set correctly
+                    } 
                 }
+            );
+    
+            toast.success("Cart updated!");
+        } catch (error) {
+            console.log("Update cart error:", error);
+    
+            if (error.response?.data?.message === "Session expired. Please log in again.") {
+                handleExpiredToken();
+            } else {
+                toast.error("Error updating cart. Please try again.");
             }
         }
     };
     
+
+
 
     // ✅ Get cart total amount
     const getCartAmount = () => {
@@ -123,26 +142,60 @@ const ShopContextProvider = (props) => {
     };
 
     // ✅ Fetch user's cart
-    const getUserCart = async () => {
-        if (!token) return;
+const getUserCart = async () => {
+    if (!token) return;
 
-        try {
-            const response = await axios.post(`${backendUrl}/api/cart/get`, {}, { headers: { token } });
+    try {
+        const response = await axios.post(`${backendUrl}/api/cart/get`, {}, { headers: { token } });
 
-            if (response.data.success) {
-                setCartItems(response.data.cartData);
-            }
-        } catch (error) {
-            console.log("Error fetching cart:", error);
-
-            if (error.response?.data?.message === "Session expired. Please log in again.") {
-                handleExpiredToken();
-            } else {
-                toast.error("Error loading cart. Please try again.");
-            }
+        if (response.data.success) {
+            setCartItems(response.data.cartData); // Set correct cart data
         }
-    };
+    } catch (error) {
+        console.log("Error fetching cart:", error);
 
+        if (error.response?.data?.message === "Session expired. Please log in again.") {
+            handleExpiredToken();
+        } else {
+            toast.error("Error loading cart. Please try again.");
+        }
+    }
+};
+
+// ✅ Load user cart when token is set
+useEffect(() => {
+    if (token) {
+        getUserCart();
+    }
+}, [token]);
+
+
+    // ✅ Remove item from cart
+// ✅ Remove item from cart
+const removeFromCart = async (itemId) => {
+    if (!token) {
+        toast.error("Log in to remove items from the cart!");
+        navigate("/login");
+        return;
+    }
+
+    let cartData = structuredClone(cartItems);
+    delete cartData[itemId]; // Remove item locally
+    setCartItems(cartData); // Update UI instantly
+
+    try {
+        await axios.post(`${backendUrl}/api/cart/remove`, { itemId }, { headers: { token } });
+        toast.success("Item removed from cart!");
+    } catch (error) {
+        console.error("Remove from cart error:", error);
+
+        if (error.response?.data?.message === "Session expired. Please log in again.") {
+            handleExpiredToken();
+        } else {
+            toast.error("Error removing item from cart. Please try again.");
+        }
+    }
+};
     // ✅ Load products on mount
     useEffect(() => {
         getProductsData();
@@ -175,6 +228,7 @@ const ShopContextProvider = (props) => {
         setCartItems,
         getCartCount,
         updateQuantity,
+        removeFromCart,
         getCartAmount,
         navigate,
         backendUrl,

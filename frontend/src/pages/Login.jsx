@@ -53,13 +53,13 @@ const Login = () => {
     const sendOtpHandler = async () => {
         const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
         console.log("Attempting to send OTP to:", formattedPhoneNumber); // Debugging
-    
+
         try {
             const response = await axios.post(`${backendUrl}/api/user/send-otp`, {
                 phoneNumber: formattedPhoneNumber,
             });
             console.log("Response from backend:", response.data); // Debugging response
-    
+
             if (response.data.success) {
                 toast.success("OTP sent to your phone.");
                 setOtpSent(true);
@@ -72,19 +72,19 @@ const Login = () => {
             toast.error("Failed to send OTP.");
         }
     };
-    
+
 
     // Handle verifying OTP
     const verifyOtpHandler = async () => {
         const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
         console.log("Attempting to verify OTP for:", formattedPhoneNumber); // Debugging
-    
+
         try {
             const response = await axios.post(`${backendUrl}/api/user/verify-otp`, {
                 phoneNumber: formattedPhoneNumber,
                 otp,
             });
-    
+
             if (response.data.success) {
                 toast.success("Phone number verified!");
                 setIsOtpVerified(true); // Mark OTP as verified
@@ -99,7 +99,7 @@ const Login = () => {
             setIsOtpVerified(false);
         }
     };
-    
+
     const resetPasswordHandler = async () => {
         const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
         if (!isOtpVerified) {
@@ -122,18 +122,18 @@ const Login = () => {
             toast.error("Failed to reset password.");
         }
     };
-    
+
 
 
     const onSubmitHandler = async (event) => {
         if (event) event.preventDefault();
-    
+
         if (currentState === "Sign Up") {
             if (!isOtpVerified) {
                 toast.error("Please verify your OTP before proceeding.");
                 return;
             }
-    
+
             try {
                 const response = await axios.post(`${backendUrl}/api/user/register`, {
                     name,
@@ -141,7 +141,7 @@ const Login = () => {
                     password,
                     phoneNumber: formatPhoneNumber(phoneNumber),
                 });
-    
+
                 if (response.data.success) {
                     toast.success("Registration successful!");
                     setToken(response.data.token);
@@ -160,7 +160,7 @@ const Login = () => {
                     identifier,
                     password,
                 });
-    
+
                 if (response.data.success) {
                     toast.success("Login successful!");
                     setToken(response.data.token);
@@ -175,7 +175,7 @@ const Login = () => {
             }
         }
     };
-    
+
 
     return (
         <AnimatePresence mode="wait">
@@ -187,10 +187,11 @@ const Login = () => {
                 className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800"
             >
                 <div className="inline-flex items-center gap-2 mb-2 mt-10">
-                    <p className="prata-regular text-3xl">
-                        {forgotPassword ? "Forgot Password" : currentState}
+                    <hr className="border-none h-[1.5px] w-8 bg-[#023047]" />
+                    <p className="outfit-regular text-3xl text-[#023047]">
+                        {forgotPassword ? "Forgot Passwordd" : currentState}
                     </p>
-                    <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
+                    <hr className="border-none h-[1.5px] w-8 bg-[#023047]" />
                 </div>
                 {forgotPassword ? (
                     <>
@@ -209,7 +210,7 @@ const Login = () => {
                                 <button
                                     type="button"
                                     onClick={sendOtpHandler}
-                                    className={`px-6 py-2 w-full sm:w-auto ${resendDisabled ? "bg-gray-400 text-gray-800" : "bg-black text-white"}`}
+                                    className={`px-6 py-2 w-full sm:w-auto ${resendDisabled ? "bg-gray-400 text-gray-800" : "bg-[#023047] text-white"}`}
                                     disabled={resendDisabled}
                                 >
                                     Send OTP
@@ -239,7 +240,7 @@ const Login = () => {
                                 <button
                                     type="button"
                                     onClick={verifyOtpHandler}
-                                    className="bg-black text-white px-6 py-2 w-full sm:w-auto"
+                                    className="bg-[#023047] text-white px-6 py-2 w-full sm:w-auto"
                                 >
                                     Verify OTP
                                 </button>
@@ -271,7 +272,7 @@ const Login = () => {
                         <button
                             type="button"
                             onClick={resetPasswordHandler}
-                            className="bg-black text-white px-6 py-2 mt-4"
+                            className="primary-btn bg-black text-white px-6 py-2 mt-4"
                         >
                             Reset Password
                         </button>
@@ -354,7 +355,7 @@ const Login = () => {
                                         <button
                                             type="button"
                                             onClick={sendOtpHandler}
-                                            className={`px-6 py-2 ${resendDisabled ? "bg-gray-400 text-gray-800" : "bg-black text-white"} w-full sm:w-auto`}
+                                            className={`px-6 py-2 ${resendDisabled ? "bg-gray-400 text-gray-800" : "bg-[#023047] text-white"} w-full sm:w-auto`}
                                             disabled={resendDisabled}
                                         >
                                             Send OTP
@@ -386,7 +387,7 @@ const Login = () => {
                                         <button
                                             type="button"
                                             onClick={verifyOtpHandler}
-                                            className="bg-black text-white px-6 py-2 w-full sm:w-auto"
+                                            className="bg-[#023047] text-white px-6 py-2 w-full sm:w-auto"
                                         >
                                             Verify OTP
                                         </button>
@@ -426,7 +427,7 @@ const Login = () => {
                                 </p>
                             </>
                         )}
-                        <button className="bg-black text-white font-light px-8 py-2 mt-4">
+                        <button className="primary-btn bg-black text-white font-light px-8 py-2 mt-4">
                             {currentState === "Login" ? "Sign In" : "Sign Up"}
                         </button>
                     </>

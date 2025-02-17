@@ -6,7 +6,8 @@ import Title from "../Title"; // Assuming Title component is properly imported
 
 const Banner = ({ image, title, subtitle, link }) => {
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 bg-[#f9f9f9]">
+    <div className="w-full px-4 sm:px-6 lg:px-8 bg-[#F5F7FA]"> {/* Light blue background */}
+
       {/* Banner Text Section */}
       <div className="text-center py-8 text-3xl">
         {/* Title Animation (Down to Up) */}
@@ -24,14 +25,14 @@ const Banner = ({ image, title, subtitle, link }) => {
           initial={{ opacity: 0, y: -50 }} // Start with low opacity and slightly higher position
           whileInView={{ opacity: 1, y: 0 }} // Fade in and move to normal position (down to up)
           transition={{ duration: 1, delay: 0.4 }} // Smooth transition with a slight delay
-          className="w-3/4 mx-auto text-xs sm:text-sm md:text-base text-gray-600"
+          className="w-3/4 mx-auto text-xs sm:text-sm md:text-base text-[#023047]"
           viewport={{ once: true }} // Animate only the first time the element comes into view
         >
           Learn more about the innovative design and features that make IMPACTPURE® the ultimate water purifier.
         </motion.p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center py-14 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center py-14 gap-14">
         {/* Banner Image - Animates Every Time it Comes into View */}
         <div className="flex justify-center items-center">
           <motion.img
@@ -51,7 +52,7 @@ const Banner = ({ image, title, subtitle, link }) => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-2xl lg:text-4xl font-bold"
+            className="text-2xl lg:text-4xl font-bold text-[#023047]"
             style={{ lineHeight: "1.8" }}
           >
             {title}
@@ -72,7 +73,7 @@ const Banner = ({ image, title, subtitle, link }) => {
             viewport={{ once: true }}
             className="flex justify-center md:justify-start"
           >
-            <button className="primary-btn">Explore More</button>
+            <button className="exp-btn">Explore More</button>
           </motion.div>
         </div>
       </div>

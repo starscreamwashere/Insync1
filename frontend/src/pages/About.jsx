@@ -76,7 +76,7 @@ const About = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5"
+          className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 text-[#023047]"
         >
           <b>Eco-Friendly Solutions:</b>
           <p className="text-gray-600">
@@ -88,7 +88,7 @@ const About = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5"
+          className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 text-[#023047]"
         >
           <b>Convenience:</b>
           <p className="text-gray-600">
@@ -100,7 +100,7 @@ const About = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5"
+          className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 text-[#023047]"
         >
           <b>Uncompromised Quality:</b>
           <p className="text-gray-600">

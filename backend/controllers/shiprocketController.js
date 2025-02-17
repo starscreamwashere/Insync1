@@ -220,25 +220,35 @@ const generateInvoice = async (req, res) => {
     console.log("📩 Received Order ID for Invoice:", orderId);
 
     if (!orderId) {
-      return res.status(400).json({ success: false, message: "Order ID is required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Order ID is required" });
     }
 
     // Step 1: Fetch the Shiprocket Order linked to this orderId
-    const shiprocketOrder = await ShiprocketOrder.findOne({ channel_order_id: orderId });
+    const shiprocketOrder = await ShiprocketOrder.findOne({
+      channel_order_id: orderId,
+    });
     if (!shiprocketOrder) {
-      return res.status(404).json({ success: false, message: "Shiprocket order not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Shiprocket order not found" });
     }
 
     // Step 2: Fetch the order from the database to get the email
     const order = await orderModel.findById(orderId);
     if (!order) {
-      return res.status(404).json({ success: false, message: "Order not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Order not found" });
     }
 
     // Extract email from order address
     const userEmail = order.address?.email;
     if (!userEmail) {
-      return res.status(400).json({ success: false, message: "No email found in order details" });
+      return res
+        .status(400)
+        .json({ success: false, message: "No email found in order details" });
     }
 
     // Step 3: Get Shiprocket API Token
@@ -251,9 +261,14 @@ const generateInvoice = async (req, res) => {
         { headers: { "Content-Type": "application/json" } }
       );
       if (!authResponse.data.token) {
-        return res.status(500).json({ success: false, message: "Failed to generate Shiprocket token." });
+        return res.status(500).json({
+          success: false,
+          message: "Failed to generate Shiprocket token.",
+        });
       }
-      tokenRecord = await ShipRocketToken.create({ token: authResponse.data.token });
+      tokenRecord = await ShipRocketToken.create({
+        token: authResponse.data.token,
+      });
     }
     const token = tokenRecord.token;
 
@@ -272,7 +287,9 @@ const generateInvoice = async (req, res) => {
     // Extract invoice URL from response
     const invoiceUrl = invoiceResponse.data.invoice_url;
     if (!invoiceUrl) {
-      return res.status(500).json({ success: false, message: "Invoice generation failed." });
+      return res
+        .status(500)
+        .json({ success: false, message: "Invoice generation failed." });
     }
 
     console.log("✅ Invoice Generated:", invoiceUrl);
@@ -286,7 +303,10 @@ const generateInvoice = async (req, res) => {
       invoiceUrl,
     });
   } catch (error) {
-    console.error("🚨 Error generating invoice:", error.response ? error.response.data : error.message);
+    console.error(
+      "🚨 Error generating invoice:",
+      error.response ? error.response.data : error.message
+    );
     res.status(500).json({
       success: false,
       message: "Error generating invoice",
@@ -347,10 +367,10 @@ const createShiprocketOrder = async (orderId) => {
     const token = tokenRecord.token;
 
     let totalSellingPrice = 0;
-    order.items.forEach(item => {
+    order.items.forEach((item) => {
       totalSellingPrice += item.quantity * 3969; // 3969 is the selling price of each item
     });
-    
+
     const shippingCharges = order.amount - totalSellingPrice;
 
     // Step 3: Prepare Shiprocket Order Data
@@ -411,15 +431,17 @@ const createShiprocketOrder = async (orderId) => {
       const newShiprocketOrder = new ShiprocketOrder(shiprocketOrderData);
       await newShiprocketOrder.save();
 
-      console.log("✅ Shiprocket Order Created:", createOrderResponse.data.order_id);
+      console.log(
+        "✅ Shiprocket Order Created:",
+        createOrderResponse.data.order_id
+      );
 
       // 🔥 Call Your Backend API to Generate Invoice
       await axios.post(
-        `http://localhost:4000/api/shiprocket/generate-invoice`,  // Call your backend API
+        `http://localhost:4000/api/shiprocket/generate-invoice`, // Call your backend API
         { orderId: order._id.toString() },
         { headers: { "Content-Type": "application/json" } }
       );
-
     } else {
       throw new Error("Error creating order in Shiprocket");
     }
@@ -427,11 +449,6 @@ const createShiprocketOrder = async (orderId) => {
     console.error("🚨 Error creating order in Shiprocket:", error);
   }
 };
-
-
-
-
-
 
 export {
   authenticateShipRocket,
